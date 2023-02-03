@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c297610a4a5717b4da1f21b55ed25b56, type: 3}
+  m_Name: HQ
+  m_EditorClassIdentifier: 
+  nameString: HQ
+  prefab: {fileID: 4725881718153722, guid: ee1a25f7149044c65bf04f6af6dae684, type: 3}
+  visual: {fileID: 8053492897894453604, guid: e2f8318f161db08468d37dc44c2dc747, type: 3}
+  width: 2
+  height: 2

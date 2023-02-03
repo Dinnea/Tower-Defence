@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c297610a4a5717b4da1f21b55ed25b56, type: 3}
+  m_Name: Pylon_Tower
+  m_EditorClassIdentifier: 
+  nameString: Energy Pylon
+  prefab: {fileID: 4193976130013776, guid: ae6256d5ec26b436fb1b2573af9e93f8, type: 3}
+  visual: {fileID: 4967630137043700, guid: ae2c948b2373c4a01bf645a32b1ed505, type: 3}
+  width: 1
+  height: 1
