@@ -30,6 +30,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6707672455750736290}
   m_Father: {fileID: 8053492897894453604}
@@ -110,7 +111,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5988791249393203982}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16a484b18a49eca43b0bf59e8d2ea271, type: 3}
+  m_Script: {fileID: 11500000, guid: cbcf65f519d706c4bb5bfc56040d0dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 6951840070324689889}
@@ -141,6 +142,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3261686285528487150}
   - {fileID: 8641539451983372039}
@@ -157,12 +159,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7547009368358760646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb3d033b3f1e66c4bbfa8aa0d01042a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d81b7aa909e9094cae24985c6a9ab60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 100
-  healthBar: {fileID: 0}
+  currentHealth: 0
+  healthBar: {fileID: 758892442569510933}
 --- !u!1001 &1352348653751487325
 PrefabInstance:
   m_ObjectHideFlags: 0
