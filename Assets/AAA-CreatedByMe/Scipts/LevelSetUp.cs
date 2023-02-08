@@ -6,13 +6,13 @@ public class LevelSetUp : MonoBehaviour
 {
     private BuildingTypeSO _hq;
     private List<Vector3> _buildableLocations;
-    [SerializeField] private StructureController _structureController;
+    [SerializeField] private GridManager _structureController;
 
 
     private void Awake()
     {
        getBuildableAreas();
-        _hq =_structureController.structureChoices[6];
+        _hq =_structureController.GetBuildingType(3);
     }
 
     private void Start()
@@ -60,8 +60,8 @@ public class LevelSetUp : MonoBehaviour
     {
         foreach (Vector3 location in _buildableLocations)
         {
-            Vector3Int gridCoords =  _structureController.grid.GetCellOnWorldPosition(location);
-            _structureController.grid.GetGridObject(gridCoords.x, gridCoords.z).isBuildZone = true;            
+            Vector2Int gridCoords =  _structureController.grid.GetCellOnWorldPosition(location);
+            _structureController.grid.GetGridObject(gridCoords.x, gridCoords.y).isBuildZone = true;            
         }
     }
 }

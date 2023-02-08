@@ -5,34 +5,45 @@ using UnityEngine;
 
 public class GhostDisplay : MonoBehaviour
 {
-    [SerializeField] private List<Transform> _ghosts;
-    [SerializeField] private Transform _currentGhost;
+    [SerializeField] private List<BuildingTypeSO> _buildingChoices;
+    [SerializeField] private GameObject _currentGhost = null; //ghost chosen from the list
+    private StructureGhost _ghostObject; //actual physical moved object
+
     [SerializeField] private LayerMask _layer;
     [Space]
-    [SerializeField] private StructureController _structureController;
+    [SerializeField] private GridManager _gridManager;
     [SerializeField] private WaveSpawner _waveSpawner;
     [Space]
     [SerializeField] private Material _available;
     [SerializeField] private Material _unavailable;
-    [Space]
-    [SerializeField] private StructureGhost _canYouBuild;
+   
     private Vector3 _location;
 
     private void Awake()
     {
-        _currentGhost = _ghosts[0];
-        _canYouBuild = _ghosts[0].GetComponent<StructureGhost>();
+        _buildingChoices = _gridManager.GetBuildingTypes();
+        _currentGhost = _buildingChoices[0].prefab;
+       
+        _ghostObject = GetComponentInChildren<StructureGhost>();
+        //Instantiate(_currentGhost, _ghostObject.transform);
+        _ghostObject.ChangeGhost(_currentGhost);
+    }
+
+    private void OnEnable()
+    {
         _waveSpawner.switchGameState += ModesChanged;
     }
 
-
+    private void OnDisable()
+    {
+        _waveSpawner.switchGameState -= ModesChanged;
+    }
     private void Update()
     {
         _location = Utilities.GetMousePositionWorld(Camera.main, _layer);
-        _currentGhost.position = _location;
-        
-        if (_structureController.CanBuild(_location)) _canYouBuild.ChangeMaterials(_available);
-        else _canYouBuild.ChangeMaterials(_unavailable);
+        _ghostObject.transform.position = _location;
+        if (_gridManager.CanBuild(_location)) _ghostObject.ChangeMaterials(_available);
+        else _ghostObject.ChangeMaterials(_unavailable);
         
         
         //_test.visual.position = Utilities.GetMousePositionWorld(Camera.main, _layer);
@@ -41,10 +52,9 @@ public class GhostDisplay : MonoBehaviour
     {
         if (i >= 0 && i <= 5)
         {
-            _ghosts[i].gameObject.SetActive(true);
-            _currentGhost.gameObject.SetActive(false);
-            _currentGhost = _ghosts[i];
-            _canYouBuild = _ghosts[i].GetComponent<StructureGhost>();
+            _currentGhost = _buildingChoices[i].prefab;
+
+            _ghostObject.ChangeGhost(_currentGhost);
         }
         else Debug.Log("No such building");
     }

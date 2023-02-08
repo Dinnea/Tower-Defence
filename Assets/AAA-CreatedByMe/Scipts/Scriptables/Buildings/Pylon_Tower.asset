@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pylon_Tower
   m_EditorClassIdentifier: 
   nameString: Energy Pylon
-  prefab: {fileID: 4193976130013776, guid: ae6256d5ec26b436fb1b2573af9e93f8, type: 3}
-  visual: {fileID: 4967630137043700, guid: ae2c948b2373c4a01bf645a32b1ed505, type: 3}
+  prefab: {fileID: 1281184777904054, guid: ae6256d5ec26b436fb1b2573af9e93f8, type: 3}
   width: 1
   height: 1
+  cost: 100

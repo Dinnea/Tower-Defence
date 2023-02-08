@@ -144,12 +144,12 @@ public class GridXZ<TGenericGridObj>
     /// <param name="x"></param>
     /// <param name="z"></param>
     /// <returns>Returns the grid coords (x, 0, z) </returns>
-    public Vector3Int GetCellOnWorldPosition(Vector3 worldPosition)
+    public Vector2Int GetCellOnWorldPosition(Vector3 worldPosition)
     {
         int x = Mathf.FloorToInt((worldPosition-_origin).x / _cellSize);
         int z = Mathf.FloorToInt((worldPosition -_origin).z / _cellSize);
 
-        return new Vector3Int(x,0, z);
+        return new Vector2Int(x, z);
     }
     /// <summary>
     /// Set grid object on grid using grid coordinates
@@ -173,8 +173,8 @@ public class GridXZ<TGenericGridObj>
     /// <param name="value"></param>
     public void SetGridObject(Vector3 worldPosition, TGenericGridObj value) //set value based on world position
     {
-        Vector3Int coords = GetCellOnWorldPosition(worldPosition);
-        SetGridObject(coords.x, coords.z, value);
+        Vector2Int coords = GetCellOnWorldPosition(worldPosition);
+        SetGridObject(coords.x, coords.y, value);
     }
 
    
@@ -204,7 +204,7 @@ public class GridXZ<TGenericGridObj>
     /// <returns></returns>
     public TGenericGridObj GetGridObject(Vector3 worldPosition)
     {
-        Vector3Int gridCoords =  GetCellOnWorldPosition(worldPosition);
-        return GetGridObject(gridCoords.x, gridCoords.z);
+        Vector2Int gridCoords =  GetCellOnWorldPosition(worldPosition);
+        return GetGridObject(gridCoords.x, gridCoords.y);
     }
 }

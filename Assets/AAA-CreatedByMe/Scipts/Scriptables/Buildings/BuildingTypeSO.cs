@@ -7,8 +7,7 @@ public class BuildingTypeSO : ScriptableObject
 {
 
     public string nameString;
-    public Transform prefab;
-    public Transform visual;
+    public GameObject prefab;
     public int width;
     public int height;
     public int cost;

@@ -9,7 +9,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private WaveSpawner _spawner;
-    [SerializeField] private StructureController _structureController;
+    [SerializeField] private GridManager _structureController;
 
     private bool _switchChange = true;
 

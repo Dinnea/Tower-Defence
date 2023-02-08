@@ -9,6 +9,7 @@ TagManager:
   - BuildingZone
   - Waypoint
   - WaypointStorage
+  - TowerMesh
   layers:
   - Default
   - TransparentFX

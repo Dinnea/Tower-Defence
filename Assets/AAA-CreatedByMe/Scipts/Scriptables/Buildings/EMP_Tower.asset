@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: EMP_Tower
   m_EditorClassIdentifier: 
   nameString: EMP
-  prefab: {fileID: 4680973176465812, guid: bb71db365cb6e4757aa6d7368e5d7967, type: 3}
-  visual: {fileID: 4064439936423624, guid: bb33d40c938f5cd4b854320a2bd4605c, type: 3}
+  prefab: {fileID: 1691257490863768, guid: bb71db365cb6e4757aa6d7368e5d7967, type: 3}
   width: 1
   height: 1
   cost: 150

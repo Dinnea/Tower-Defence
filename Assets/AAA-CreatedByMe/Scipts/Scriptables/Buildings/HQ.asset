@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HQ
   m_EditorClassIdentifier: 
   nameString: HQ
-  prefab: {fileID: 4725881718153722, guid: ee1a25f7149044c65bf04f6af6dae684, type: 3}
-  visual: {fileID: 8053492897894453604, guid: e2f8318f161db08468d37dc44c2dc747, type: 3}
+  prefab: {fileID: 7547009368358760646, guid: e2f8318f161db08468d37dc44c2dc747, type: 3}
   width: 2
   height: 2
+  cost: 0
