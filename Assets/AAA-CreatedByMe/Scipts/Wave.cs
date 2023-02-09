@@ -6,9 +6,11 @@ using UnityEngine;
 public class Wave
 {
     public string name;
-    public Transform enemy1;
-    public Transform enemy2;
-    public Transform enemy3;
+
+    [Header("Enemies present in wave")]
+    public bool enemyType1;
+    public bool enemyType2;
+    public bool enemyType3;
 
 
     public int count1;
@@ -17,6 +19,7 @@ public class Wave
     public int countTotal;
 
     public float rate = 0.5f;
+
 
     public void SetUp()
     {

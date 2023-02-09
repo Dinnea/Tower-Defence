@@ -23,10 +23,13 @@ public class BasicEnemyFactory : MonoBehaviour, IEnemyFactory
     }
     public void SpawnEnemy()
     {
-        Debug.Log("Spawning enemy: " + enemy.name);
-        GameObject newEnemy = Instantiate(enemy, _navPoints[0], Quaternion.Euler(0, -90, 0));
-        IEnemy ai = newEnemy.GetComponent<IEnemy>();
-        ai.SetNavPoints(_navPoints);
+        if (enemy != null)
+        {
+            Debug.Log("Spawning enemy: " + enemy.name);
+            GameObject newEnemy = Instantiate(enemy, _navPoints[0], Quaternion.Euler(0, -90, 0));
+            IEnemy ai = newEnemy.GetComponent<IEnemy>();
+            ai.SetNavPoints(_navPoints);
+        }
     }
 
     public void GetNavPoints()

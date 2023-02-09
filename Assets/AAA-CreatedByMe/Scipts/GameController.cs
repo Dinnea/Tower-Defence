@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private WaveSpawner _spawner;
+    [SerializeField] private LevelFSM _spawner;
     [SerializeField] private GridManager _structureController;
 
     private bool _switchChange = true;
@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        _spawner.switchGameState += stateChanged;
+        _spawner.onSwitchGameState += stateChanged;
     }
 
     public void SwitchModes(bool value)

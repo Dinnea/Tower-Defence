@@ -33,7 +33,6 @@ public class GridManager : MonoBehaviour
 {
     
     [SerializeField] private List<BuildingTypeSO> _structureChoices;
-    [SerializeField] private BuildingTypeSO _empty;
     [SerializeField] private LayerMask _layer;
     
     //Those variables shouldn't be changed during runtime.

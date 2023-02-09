@@ -9,17 +9,36 @@ using TMPro;
 /// </summary>
 public class CountdownController : MonoBehaviour
 {
-    public int countdownTime;
-    [SerializeField] private TextMeshProUGUI _countdownDisplay;
+    [SerializeField] private GameState gameState;
+    private TextMeshProUGUI _countdownText;
 
-    private IEnumerator countdownToWave()
+    private void Awake()
     {
-        while (countdownTime > 0)
+        _countdownText = GetComponent<TextMeshProUGUI>();
+    }
+    private void OnEnable()
+    {
+        if (gameState is BuildingState)
         {
-            _countdownDisplay.text = countdownTime.ToString();
-
-            yield return new WaitForSeconds(1f);
-            countdownTime--;
+            (gameState as BuildingState).onClockTick += updateTimer;
+            (gameState as BuildingState).onStateEnd += emptySelf;
         }
+            
+    }
+
+    private void OnDisable()
+    {
+       if(gameState is BuildingState)
+            (gameState as BuildingState).onClockTick = updateTimer;
+    }
+
+    private void updateTimer(int seconds)
+    {
+        _countdownText.text = seconds.ToString();
+    }
+
+    private void emptySelf()
+    {
+        _countdownText.text = "";
     }
 }
