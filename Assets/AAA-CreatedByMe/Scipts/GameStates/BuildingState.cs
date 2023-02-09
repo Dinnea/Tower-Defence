@@ -40,6 +40,7 @@ public class BuildingState : GameState
 
     public void EndStateEarly()
     {
+        StopAllCoroutines();
         _waveCountdown = 0;
     }
 }

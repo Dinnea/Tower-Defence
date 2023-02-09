@@ -23,7 +23,6 @@ public class CountdownController : MonoBehaviour
             (gameState as BuildingState).onClockTick += updateTimer;
             (gameState as BuildingState).onStateEnd += emptySelf;
         }
-            
     }
 
     private void OnDisable()

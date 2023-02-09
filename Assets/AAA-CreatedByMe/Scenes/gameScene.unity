@@ -1282,7 +1282,6 @@ MonoBehaviour:
   _currentWave: -1
   timeBetweenWaves: 660
   gameObjects: []
-  _debug: 1
 --- !u!114 &181419611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2793,7 +2792,6 @@ GameObject:
   - component: {fileID: 414347673}
   - component: {fileID: 414347672}
   - component: {fileID: 414347671}
-  - component: {fileID: 414347676}
   - component: {fileID: 414347678}
   - component: {fileID: 414347679}
   m_Layer: 0
@@ -2894,20 +2892,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &414347676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 414347670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b38bbd4c8d688954c8f177b618461bd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spawner: {fileID: 181419610}
-  _structureController: {fileID: 414347678}
 --- !u!114 &414347678
 MonoBehaviour:
   m_ObjectHideFlags: 0

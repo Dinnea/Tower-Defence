@@ -25,12 +25,10 @@ public class LevelFSM : MonoBehaviour
         return timeBetweenWaves;
     }
 
-    public event EventHandler<bool> onSwitchGameState;
     public GameObject[] gameObjects;
 
     private GameStateEnum _state;
 
-    [SerializeField] private bool _debug = true;
     [SerializeField] private IEnemyFactory _enemyFactory;
 
     private void Awake()
@@ -97,7 +95,7 @@ public class LevelFSM : MonoBehaviour
 
     private void OnEnable()
     {
-       subscribeToState();
+       //subscribeToState();
     }
     private void OnDisable()
     {

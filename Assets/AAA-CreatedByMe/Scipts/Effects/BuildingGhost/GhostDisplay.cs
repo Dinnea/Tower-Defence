@@ -26,13 +26,11 @@ public class GhostDisplay : MonoBehaviour
     private void OnEnable()
     {
         _gridManager.onStructureChanged += SetGhostModel;
-        _waveSpawner.onSwitchGameState += ModesChanged;
     }
 
     private void OnDisable()
     {
         _gridManager.onStructureChanged -= SetGhostModel;
-        _waveSpawner.onSwitchGameState -= ModesChanged;
     }
     private void Update()
     {
@@ -49,10 +47,5 @@ public class GhostDisplay : MonoBehaviour
     {
         _currentGhost = structureChanged.test.prefab;
         _ghostObject.ChangeGhost(_currentGhost);
-    }
-
-    public void ModesChanged (object sender, bool value)
-    {
-        _currentGhost?.gameObject.SetActive(value);
     }
 }

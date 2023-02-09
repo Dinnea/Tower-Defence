@@ -8,7 +8,6 @@ public class LevelSetUp : MonoBehaviour
     private List<Vector3> _buildableLocations;
     [SerializeField] private GridManager _structureController;
 
-
     private void Awake()
     {
        getBuildableAreas();
