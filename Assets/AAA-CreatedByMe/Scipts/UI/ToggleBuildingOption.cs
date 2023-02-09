@@ -15,13 +15,13 @@ public class ToggleBuildingOption : MonoBehaviour
     }
     private void OnEnable()
     {
-        _moneyManager.canAfford += toggle;
+        _moneyManager.onMoneyChanged += toggle;
     }
     private void OnDisable()
     {
-        _moneyManager.canAfford -= toggle;
+        _moneyManager.onMoneyChanged -= toggle;
     }
-    private void toggle(CanAfford canAfford)
+    private void toggle(MoneyData canAfford)
     {
         if(choiceID == canAfford.id) thisButton.interactable = canAfford.value;
     }

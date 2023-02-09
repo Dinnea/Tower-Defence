@@ -5,14 +5,14 @@ using UnityEngine;
 /// <summary>
 /// Object placed on the StructureController grid. Contains structures (or an empty structure slot), can be marked as a buildzone (default is non buildzone).
 /// </summary>
-public class Cell
+public class Tile
 {
-    private GridXZ<Cell> _grid;
+    private GridXZ<Tile> _grid;
     private int _x, _z;
-    private Transform _objectOnTile;
+    private Transform _objectOnTile = null;
     public bool isBuildZone = false;
 
-    public Cell(GridXZ<Cell> grid, int x, int z)
+    public Tile(GridXZ<Tile> grid, int x, int z)
     {
         _grid = grid;
         _x = x;
@@ -36,6 +36,11 @@ public class Cell
     {
         return _x + ", " + _z + "\n" + _objectOnTile.name;
 
+    }
+
+    public Transform GetObjectOnTile()
+    {
+        return _objectOnTile;
     }
 
     public bool IsCellFree()

@@ -3,50 +3,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CanAfford
+public class MoneyData
 {
     public int id;
     public bool value;
-    public CanAfford(int pId, bool pValue)
+    public float money;
+    public MoneyData(int pId, bool pValue, float pMoney)
     {
         id = pId;
         value = pValue;
+        money = pMoney;
     }
 }
 public class MoneyManager : MonoBehaviour
 {
     [SerializeField] private float _money = 1000;
     private GridManager _gridManager;
-    public System.Action<CanAfford> canAfford;
+    private List<BuildingTypeSO> _buildings;
+    public System.Action<MoneyData> onMoneyChanged;
 
     private void OnEnable()
     {
-        _gridManager.onBuildAttempt += BuyTower;
+        _gridManager.onBuild += BuyTower;
     }
 
     private void OnDisable()
     {
-        _gridManager.onBuildAttempt -= BuyTower;
+        _gridManager.onBuild -= BuyTower;
     }
 
     private void Awake()
     {
         _gridManager = GetComponent<GridManager>();
+        _buildings = _gridManager.GetBuildingTypes();
+        checkIfCanAffordBuildings();
     }
 
     public void BuyTower(BuildData buildData)
     {
-        Debug.Log("Money was taken: " + buildData.cost);
         _money -= buildData.cost;
-        Debug.Log("Balance: " + _money);
         //if money is too low, disable building options
-        List<BuildingTypeSO> buildings = _gridManager.GetBuildingTypes();
-        for (int i = 0; i< buildings.Count; i++)
-        {   
-            canAfford?.Invoke(new CanAfford(i, canAffordBuild(buildings[i].cost))); 
+        checkIfCanAffordBuildings();
+    }
+    private void checkIfCanAffordBuildings()
+    {
+        for (int i = 0; i < _buildings.Count; i++)
+        {
+            onMoneyChanged?.Invoke(new MoneyData(i, canAffordBuild(_buildings[i].cost), _money));
         }
     }
-
     private bool canAffordBuild(float cost)
     {
         if (_money - cost >= 0) return true;

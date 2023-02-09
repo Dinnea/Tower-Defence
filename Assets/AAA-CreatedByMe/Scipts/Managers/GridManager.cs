@@ -8,10 +8,19 @@ using UnityEngine.Events;
 
 public class BuildData
 {
-    public int cost;
-    public BuildData(int pCost)
+    public float cost;
+    public BuildData(float pCost)
     {
         cost = pCost;
+    }
+}
+
+public class SaleData
+{
+    public float income;
+    public SaleData(float pIncome)
+    {
+        income = pIncome;
     }
 }
 
@@ -41,13 +50,16 @@ public class GridManager : MonoBehaviour
     [SerializeField] private int _rows = 15;
     [SerializeField] private int _cellSize = 5;
     [SerializeField] private Vector3 origin = Vector3.zero;
+    [Space]
+    [SerializeField] private bool sell = false;
 
     private BuildingTypeSO _objectToBuild;
    // private MoneyManager _playerController;
     private int _objectsBuilt = 0;
-    public GridXZ<Cell> grid;
+    public GridXZ<Tile> grid;
 
-    public System.Action<BuildData> onBuildAttempt;
+    public System.Action<BuildData> onBuild;
+    public System.Action<SaleData> onSale;
     public System.Action<StructureChanged> onStructureChanged;
 
     public List<BuildingTypeSO> GetBuildingTypes()
@@ -63,26 +75,31 @@ public class GridManager : MonoBehaviour
     private void Awake()
     {
         //_playerController = GetComponent<MoneyManager>();
-        grid = new GridXZ<Cell>(_columns, _rows, _cellSize, origin, (GridXZ<Cell> g, int x, int z) => new Cell(g, x, z));
+        grid = new GridXZ<Tile>(_columns, _rows, _cellSize, origin, (GridXZ<Tile> g, int x, int z) => new Tile(g, x, z));
         SetStructure(0);
 
     }
     /// <summary>
-    /// Chooses a structure to build from the list. Default is choice [0]. Structure chosen will remain unchanged if the number is out of scope.
+    /// Chooses a structure to build from the list. Defaults to [0] = empty structure that cannot be placed.
     /// </summary>
     /// <param name="number"></param>
     public void SetStructure(int number)
     {
         if (number >= 0 && number <= _structureChoices.Count)
         {
+            sell = false;
             _objectToBuild = _structureChoices[number];
         }
         else
         {
             _objectToBuild = _structureChoices[0];
-            Debug.Log("No such building");
         }
         onStructureChanged?.Invoke(new StructureChanged(_objectToBuild));
+    }
+
+    public void EnableSell()
+    {
+        sell = true;
     }
 
     /// <summary>
@@ -129,10 +146,23 @@ public class GridManager : MonoBehaviour
         {
             grid.GetGridObject(gridPosition.x, gridPosition.y).SetObjectOnTile(built);
         }
-        onBuildAttempt?.Invoke(new BuildData(_objectToBuild.cost));
+        onBuild?.Invoke(new BuildData(_objectToBuild.cost));
         SetStructure(-1);
          _objectsBuilt++;
        // _objectToBuild = null;
+    }
+
+    public void SellFromTile(Vector2Int gridCoords)
+    {
+        Tile target = grid.GetGridObject(gridCoords.x, gridCoords.y);
+        if (!target.IsCellFree())
+        {
+            //SetStructure(-1);
+            GameObject toSell = target.GetObjectOnTile().gameObject;
+            //float income = toSell.
+            //onSale?.Invoke(new SaleData())
+            Destroy(toSell);
+        }        
     }
 
 
@@ -157,7 +187,7 @@ public class GridManager : MonoBehaviour
         bool canBuild = true; //default is true
         foreach (Vector2Int gridPosition in gridPositionList)
         {
-            Cell gridObject = grid.GetGridObject(gridPosition.x, gridPosition.y);
+            Tile gridObject = grid.GetGridObject(gridPosition.x, gridPosition.y);
             if (!gridObject.IsCellFree() || !gridObject.isBuildZone)
             {
                 canBuild = false;
@@ -173,7 +203,8 @@ public class GridManager : MonoBehaviour
         {
             Vector3 location = Utilities.GetMousePositionWorld(Camera.main, _layer);
             Vector2Int gridCoords = grid.GetCellOnWorldPosition(location);
-            if (CanBuild(gridCoords) && _objectToBuild != _structureChoices[0]) BuildOnTile(gridCoords);
+            if (sell) SellFromTile(gridCoords);
+            else if (CanBuild(gridCoords) && _objectToBuild != _structureChoices[0]) BuildOnTile(gridCoords);
         }
     }
 }
