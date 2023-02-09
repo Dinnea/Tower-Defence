@@ -9,6 +9,7 @@ public class Tile
 {
     private GridXZ<Tile> _grid;
     private int _x, _z;
+    private BuildingTypeSO _templateObjectOnTile = null;
     private Transform _objectOnTile = null;
     public bool isBuildZone = false;
 
@@ -19,10 +20,19 @@ public class Tile
         _z = z;
     }
 
+    private void setObjectTemplate(BuildingTypeSO template)
+    {
+        _templateObjectOnTile = template;
+    }
+    public void SetObjectOnTile(Transform objectPlaced, BuildingTypeSO template)
+    {
+        SetObjectOnTile(objectPlaced);
+        setObjectTemplate(template);
+    }
     public void SetObjectOnTile(Transform objectPlaced)
     {
         if (isBuildZone){
-            this._objectOnTile = objectPlaced;
+            _objectOnTile = objectPlaced;
             _grid.TriggerGridObjectChanged(_x, _z);
         }        
     }
@@ -41,6 +51,11 @@ public class Tile
     public Transform GetObjectOnTile()
     {
         return _objectOnTile;
+    }
+
+    public float GetObjectCost()
+    {
+        return _templateObjectOnTile.cost;
     }
 
     public bool IsCellFree()

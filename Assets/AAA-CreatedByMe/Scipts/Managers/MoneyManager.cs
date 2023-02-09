@@ -25,11 +25,13 @@ public class MoneyManager : MonoBehaviour
     private void OnEnable()
     {
         _gridManager.onBuild += BuyTower;
+        _gridManager.onSale += SellTower;
     }
 
     private void OnDisable()
     {
         _gridManager.onBuild -= BuyTower;
+        _gridManager.onSale -= SellTower;
     }
 
     private void Awake()
@@ -43,6 +45,11 @@ public class MoneyManager : MonoBehaviour
     {
         _money -= buildData.cost;
         //if money is too low, disable building options
+        checkIfCanAffordBuildings();
+    }
+    public void SellTower(SaleData saleData)
+    {
+        _money += saleData.income;
         checkIfCanAffordBuildings();
     }
     private void checkIfCanAffordBuildings()

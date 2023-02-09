@@ -52,6 +52,8 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Vector3 origin = Vector3.zero;
     [Space]
     [SerializeField] private bool sell = false;
+    [Range(0.0f, 1.0f)]
+    [SerializeField] private float valueOnSale = 0.75f;
 
     private BuildingTypeSO _objectToBuild;
    // private MoneyManager _playerController;
@@ -144,7 +146,7 @@ public class GridManager : MonoBehaviour
 
         foreach (Vector2Int gridPosition in gridPositionList)
         {
-            grid.GetGridObject(gridPosition.x, gridPosition.y).SetObjectOnTile(built);
+            grid.GetGridObject(gridPosition.x, gridPosition.y).SetObjectOnTile(built, _objectToBuild);
         }
         onBuild?.Invoke(new BuildData(_objectToBuild.cost));
         SetStructure(-1);
@@ -159,8 +161,9 @@ public class GridManager : MonoBehaviour
         {
             //SetStructure(-1);
             GameObject toSell = target.GetObjectOnTile().gameObject;
-            //float income = toSell.
-            //onSale?.Invoke(new SaleData())
+            float income = target.GetObjectCost();
+            income *=valueOnSale;
+            onSale?.Invoke(new SaleData(income));
             Destroy(toSell);
         }        
     }
