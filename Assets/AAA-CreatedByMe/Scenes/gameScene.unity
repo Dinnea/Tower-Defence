@@ -2874,10 +2874,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _structureChoices:
+  - {fileID: 11400000, guid: c2c2f6950cc725745b91efc37c63c6ff, type: 2}
   - {fileID: 11400000, guid: 670ecc0cdd301f849ab1a5d86e0510a4, type: 2}
   - {fileID: 11400000, guid: 768fb26f2271c1147bf7088b613b9d7c, type: 2}
   - {fileID: 11400000, guid: df6363a5a9b517f4fb604124b71107fb, type: 2}
   - {fileID: 11400000, guid: 818e3baccd3205b44acf93d9a147ccf1, type: 2}
+  _empty: {fileID: 0}
   _layer:
     serializedVersion: 2
     m_Bits: 64
@@ -3430,7 +3432,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3442,7 +3444,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3498,7 +3500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moneyManager: {fileID: 414347679}
-  choiceID: 0
+  choiceID: 1
 --- !u!1001 &483180902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5032,7 +5034,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5044,7 +5046,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5100,7 +5102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moneyManager: {fileID: 414347679}
-  choiceID: 2
+  choiceID: 3
 --- !u!4 &682804749 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2629025236068104223, guid: 9d4119a82d798434491732b4f606d177,
@@ -16940,7 +16942,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -16952,7 +16954,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -17008,7 +17010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moneyManager: {fileID: 414347679}
-  choiceID: 1
+  choiceID: 2
 --- !u!4 &2137740827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2629025236068104223, guid: 9d4119a82d798434491732b4f606d177,

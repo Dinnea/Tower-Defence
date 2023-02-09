@@ -12,7 +12,7 @@ public class LevelSetUp : MonoBehaviour
     private void Awake()
     {
        getBuildableAreas();
-        _hq =_structureController.GetBuildingType(3);
+        _hq =_structureController.GetBuildingType(4);
     }
 
     private void Start()

@@ -21,42 +21,52 @@ public class GhostDisplay : MonoBehaviour
 
     private void Awake()
     {
-        _buildingChoices = _gridManager.GetBuildingTypes();
-        _currentGhost = _buildingChoices[0].prefab;
+        //_buildingChoices = _gridManager.GetBuildingTypes();
+        //_currentGhost = _buildingChoices[0].prefab;
        
         _ghostObject = GetComponentInChildren<StructureGhost>();
         //Instantiate(_currentGhost, _ghostObject.transform);
-        _ghostObject.ChangeGhost(_currentGhost);
+        //_ghostObject.ChangeGhost(_currentGhost);
     }
 
     private void OnEnable()
     {
+        _gridManager.onStructureChanged += SetGhostModel;
         _waveSpawner.switchGameState += ModesChanged;
     }
 
     private void OnDisable()
     {
+        _gridManager.onStructureChanged -= SetGhostModel;
         _waveSpawner.switchGameState -= ModesChanged;
     }
     private void Update()
     {
-        _location = Utilities.GetMousePositionWorld(Camera.main, _layer);
-        _ghostObject.transform.position = _location;
-        if (_gridManager.CanBuild(_location)) _ghostObject.ChangeMaterials(_available);
-        else _ghostObject.ChangeMaterials(_unavailable);
-        
+        if(_currentGhost != null)
+        {
+            _location = Utilities.GetMousePositionWorld(Camera.main, _layer);
+            _ghostObject.transform.position = _location;
+            if (_gridManager.CanBuild(_location)) _ghostObject.ChangeMaterials(_available);
+            else _ghostObject.ChangeMaterials(_unavailable);
+        }       
         
         //_test.visual.position = Utilities.GetMousePositionWorld(Camera.main, _layer);
     }
+
+    public void SetGhostModel(StructureChanged structureChanged)
+    {
+        _currentGhost = structureChanged.test.prefab;//structureChanged.structureModel;
+        _ghostObject.ChangeGhost(_currentGhost);
+    }
     public void SetBuilding(int i)
     {
-        if (i >= 0 && i <= 5)
+       /* if (i >= 0 && i <= 5)
         {
             _currentGhost = _buildingChoices[i].prefab;
 
             _ghostObject.ChangeGhost(_currentGhost);
         }
-        else Debug.Log("No such building");
+        else Debug.Log("No such building");*/
     }
 
     public void ModesChanged (object sender, bool value)

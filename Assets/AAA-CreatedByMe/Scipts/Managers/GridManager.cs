@@ -15,6 +15,17 @@ public class BuildData
     }
 }
 
+public class StructureChanged
+{
+    public BuildingTypeSO test;
+    public GameObject structureModel;
+
+    public StructureChanged(BuildingTypeSO structure)
+    {
+        test = structure;
+    }
+}
+
 /// <summary>
 /// Grid template implementation. Can build towers and other structures. Keeps track of how many objects have been built.
 /// </summary>
@@ -22,6 +33,7 @@ public class GridManager : MonoBehaviour
 {
     
     [SerializeField] private List<BuildingTypeSO> _structureChoices;
+    [SerializeField] private BuildingTypeSO _empty;
     [SerializeField] private LayerMask _layer;
     
     //Those variables shouldn't be changed during runtime.
@@ -37,6 +49,7 @@ public class GridManager : MonoBehaviour
     public GridXZ<Cell> grid;
 
     public System.Action<BuildData> onBuildAttempt;
+    public System.Action<StructureChanged> onStructureChanged;
 
     public List<BuildingTypeSO> GetBuildingTypes()
     {
@@ -52,7 +65,7 @@ public class GridManager : MonoBehaviour
     {
         //_playerController = GetComponent<MoneyManager>();
         grid = new GridXZ<Cell>(_columns, _rows, _cellSize, origin, (GridXZ<Cell> g, int x, int z) => new Cell(g, x, z));
-        _objectToBuild = _structureChoices[0];
+        SetStructure(0);
 
     }
     /// <summary>
@@ -65,7 +78,12 @@ public class GridManager : MonoBehaviour
         {
             _objectToBuild = _structureChoices[number];
         }
-        else Debug.Log("No such building");
+        else
+        {
+            _objectToBuild = _structureChoices[0];
+            Debug.Log("No such building");
+        }
+        onStructureChanged?.Invoke(new StructureChanged(_objectToBuild));
     }
 
     /// <summary>
@@ -99,16 +117,7 @@ public class GridManager : MonoBehaviour
     {
         Vector2Int gridCoords = grid.GetCellOnWorldPosition(location);
 
-        List<Vector2Int> gridPositionList = _objectToBuild.GetGridPositionList(new Vector2Int(gridCoords.x, gridCoords.y)); //list of tiles taken up by object
-        Transform built = Instantiate(_objectToBuild.prefab.transform, grid.GetCellPositionInWorld(gridCoords.x, gridCoords.y), Quaternion.identity);
-        //Instantiate(_objectToBuild.visual, grid.GetCellPositionInWorld(gridCoords.x, gridCoords.y), Quaternion.identity, built);
-
-        foreach (Vector2Int gridPosition in gridPositionList)
-        {
-           grid.GetGridObject(gridPosition.x, gridPosition.y).SetObjectOnTile(built);
-        }
-        onBuildAttempt?.Invoke(new BuildData(_objectToBuild.cost));
-        _objectsBuilt++;
+        BuildOnTile(gridCoords);
     }
 
     public void BuildOnTile(Vector2Int gridCoords)
@@ -122,8 +131,9 @@ public class GridManager : MonoBehaviour
             grid.GetGridObject(gridPosition.x, gridPosition.y).SetObjectOnTile(built);
         }
         onBuildAttempt?.Invoke(new BuildData(_objectToBuild.cost));
+        SetStructure(-1);
          _objectsBuilt++;
-
+       // _objectToBuild = null;
     }
 
 
@@ -164,7 +174,7 @@ public class GridManager : MonoBehaviour
         {
             Vector3 location = Utilities.GetMousePositionWorld(Camera.main, _layer);
             Vector2Int gridCoords = grid.GetCellOnWorldPosition(location);
-            if (CanBuild(gridCoords)) BuildOnTile(gridCoords);
+            if (CanBuild(gridCoords) && _objectToBuild != _structureChoices[0]) BuildOnTile(gridCoords);
         }
     }
 }
