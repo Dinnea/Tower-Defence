@@ -20,7 +20,7 @@ public abstract class AbstractTower : MonoBehaviour
         range = GetComponentInChildren<CapsuleCollider>();
     }
 
-    protected IEnumerator countdownToAction()
+    protected virtual IEnumerator countdownToAction()
     {
         while (cdLeft > 0)
         {

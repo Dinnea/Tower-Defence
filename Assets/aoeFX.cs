@@ -19,6 +19,11 @@ public class aoeFX : MonoBehaviour
         setRadius(_owner.range.radius);
         _owner.onAction += triggerVFX;
     }
+
+    private void OnDisable()
+    {
+        _owner.onAction -= triggerVFX;
+    }
     private void setRadius(float radius)
     {
         transform.localScale = new Vector3(radius*2, transform.localScale.y, radius*2);

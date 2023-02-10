@@ -18,7 +18,7 @@ public class StructureGhost : MonoBehaviour
 
     public void ChangeGhost(GameObject ghost)
     {
-        if (ghost == null) Debug.Log("pie");
+        //if (ghost == null) Debug.Log("pie");
         _renderers.Clear();
         if (_ghostObject != null)
         {
