@@ -156,18 +156,25 @@ public class GridManager : MonoBehaviour
 
     public void SellFromTile(Vector2Int gridCoords)
     {
-        Tile target = grid.GetGridObject(gridCoords.x, gridCoords.y);
-        if (!target.IsCellFree())
+        if (!outOfBounds(gridCoords))
         {
-            //SetStructure(-1);
-            GameObject toSell = target.GetObjectOnTile().gameObject;
-            float income = target.GetObjectCost();
-            income *=valueOnSale;
-            onSale?.Invoke(new SaleData(income));
-            Destroy(toSell);
-        }        
+            Tile target = grid.GetGridObject(gridCoords.x, gridCoords.y);
+            if (!target.IsCellFree())
+            {
+                GameObject toSell = target.GetObjectOnTile().gameObject;
+                float income = target.GetObjectCost();
+                income *= valueOnSale;
+                onSale?.Invoke(new SaleData(income));
+                Destroy(toSell);
+            }
+        }       
     }
 
+    private bool outOfBounds(Vector2Int gridCoords)
+    {
+        if (gridCoords.x == -1 || gridCoords.y == -1) return true;
+        else return false;
+    }
 
     /// <summary>
     /// Checks if its posssible to build at the location(s) selected.
@@ -179,6 +186,7 @@ public class GridManager : MonoBehaviour
         if (location.x != 0 && location.y != 0 && location.z != 0)
         {            
             Vector2Int gridCoords = grid.GetCellOnWorldPosition(location);
+            
             return CanBuild(gridCoords);
         }
         return false;
@@ -186,18 +194,22 @@ public class GridManager : MonoBehaviour
 
     public bool CanBuild(Vector2Int gridCoords) 
     {
-        List<Vector2Int> gridPositionList = _objectToBuild.GetGridPositionList(new Vector2Int(gridCoords.x, gridCoords.y)); //list of tiles taken up by object
-        bool canBuild = true; //default is true
-        foreach (Vector2Int gridPosition in gridPositionList)
+       if(outOfBounds(gridCoords)) return false;
+        else
         {
-            Tile gridObject = grid.GetGridObject(gridPosition.x, gridPosition.y);
-            if (!gridObject.IsCellFree() || !gridObject.isBuildZone)
+            List<Vector2Int> gridPositionList = _objectToBuild.GetGridPositionList(new Vector2Int(gridCoords.x, gridCoords.y)); //list of tiles taken up by object
+            bool canBuild = true; //default is true
+            foreach (Vector2Int gridPosition in gridPositionList)
             {
-                canBuild = false;
-                break; //stop checking after one spot isn't buildable
+                Tile gridObject = grid.GetGridObject(gridPosition.x, gridPosition.y);
+                if (!gridObject.IsCellFree() || !gridObject.isBuildZone)
+                {
+                    canBuild = false;
+                    break; //stop checking after one spot isn't buildable
+                }
             }
+            return canBuild;
         }
-        return canBuild;
     }
 
     private void Update()

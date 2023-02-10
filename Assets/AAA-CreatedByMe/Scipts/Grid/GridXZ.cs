@@ -143,11 +143,13 @@ public class GridXZ<TGenericGridObj>
     /// <param name="worldPosition"></param>
     /// <param name="x"></param>
     /// <param name="z"></param>
-    /// <returns>Returns the grid coords (x, 0, z) </returns>
+    /// <returns>Returns the grid coords (x, z), if either is -1, location is out of bounds </returns>
     public Vector2Int GetCellOnWorldPosition(Vector3 worldPosition)
     {
         int x = Mathf.FloorToInt((worldPosition-_origin).x / _cellSize);
         int z = Mathf.FloorToInt((worldPosition -_origin).z / _cellSize);
+        if (x < 0 || x >= _columns) x = -1;
+        if( z < 0 || z >= _rows) z = -1;
 
         return new Vector2Int(x, z);
     }
