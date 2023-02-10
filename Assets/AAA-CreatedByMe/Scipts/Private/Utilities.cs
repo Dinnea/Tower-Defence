@@ -6,19 +6,89 @@ namespace Personal.Utilities
 {
     public static class Utilities
     {
-       // public const int sortingOrderDefault = 5000;
-
-        // Create Text in the World
-        public static TextMesh CreateTextInWorld(string text, Transform parent = null, Vector3 localPosition = default, int fontSize = 40, Color? color = null, 
-                                               Vector3 rotation = default, TextAnchor textAnchor = TextAnchor.UpperLeft, TextAlignment textAlignment = TextAlignment.Left)//, int sortingOrder = sortingOrderDefault)
+        //Vectors and angles
+        // Generate random normalized direction
+        public static Vector3 GetRandomDirXZ()
         {
-            if (color == null) color = Color.white;
-            return CreateTextInWorld(parent, text, localPosition, fontSize, (Color)color, rotation, textAnchor, textAlignment);//, sortingOrder);
+            return new Vector3(UnityEngine.Random.Range(-1f, 1f), 0, UnityEngine.Random.Range(-1f, 1f)).normalized;
         }
 
 
+        public static Vector3 GetVectorFromAngle(float angle)
+        {
+            // angle = 0 -> 360
+            float angleRad = angle * (Mathf.PI / 180f);
+            return new Vector3(Mathf.Sin(angleRad), Mathf.Cos(angleRad));
+        }
+        public static Vector3 GetVectorFromAngleXZ(float angle)
+        {
+            // angle = 0 -> 360
+            float angleRad = angle * (Mathf.PI / 180f);
+            return new Vector3(Mathf.Cos(angleRad), 0, Mathf.Sin(angleRad));
+        }
+
+        public static Vector3 GetVectorFromAngleXZ(float angle, Transform transform, bool isAngleGlobal = false)
+        {
+            if (!isAngleGlobal)
+            {
+                angle += transform.eulerAngles.y;
+
+            }
+            // angle = 0 -> 360
+            float angleRad = angle * (Mathf.PI / 180f);
+            return new Vector3(Mathf.Sin(angleRad), 0, Mathf.Cos(angleRad));
+        }
+
+        public static float GetAngleFromVectorFloat(Vector3 dir)
+        {
+            dir = dir.normalized;
+            float floatAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            if (floatAngle < 0) floatAngle += 360;
+
+            return floatAngle;
+        }
+
+        public static int GetAngleFromVector(Vector3 dir)
+        {
+            float floatAngle = GetAngleFromVectorFloat(dir);
+            int intAngle = Mathf.RoundToInt(floatAngle);
+
+            return intAngle;
+        }
+
+        /// <summary>
+        /// Create Text in the World default
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="parent"></param>
+        /// <param name="localPosition"></param>
+        /// <param name="fontSize"></param>
+        /// <param name="color"></param>
+        /// <param name="rotation"></param>
+        /// <param name="textAnchor"></param>
+        /// <param name="textAlignment"></param>
+        /// <returns></returns>
+        public static TextMesh CreateTextInWorld(string text, Transform parent = null, Vector3 localPosition = default, int fontSize = 40, Color? color = null, 
+                                               Vector3 rotation = default, TextAnchor textAnchor = TextAnchor.UpperLeft, TextAlignment textAlignment = TextAlignment.Left)
+        {
+            if (color == null) color = Color.white;
+            return CreateTextInWorld(parent, text, localPosition, fontSize, (Color)color, rotation, textAnchor, textAlignment);
+        }
+
+        /// <summary>
+        /// Create Text in the World, customized
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="parent"></param>
+        /// <param name="localPosition"></param>
+        /// <param name="fontSize"></param>
+        /// <param name="color"></param>
+        /// <param name="rotation"></param>
+        /// <param name="textAnchor"></param>
+        /// <param name="textAlignment"></param>
+        /// <returns></returns>
         public static TextMesh CreateTextInWorld(Transform parent, string text, Vector3 localPosition, int fontSize, Color color, 
-                                               Vector3 rotation, TextAnchor textAnchor, TextAlignment textAlignment)//, int sortingOrder)
+                                               Vector3 rotation, TextAnchor textAnchor, TextAlignment textAlignment)
         {
             GameObject gameObject = new GameObject("World_Text", typeof(TextMesh));
             Transform transform = gameObject.transform;
@@ -31,7 +101,6 @@ namespace Personal.Utilities
             textMesh.text = text;
             textMesh.fontSize = fontSize;
             textMesh.color = color;
-           // textMesh.GetComponent<MeshRenderer>().sortingOrder = sortingOrder;
             return textMesh;
         }
 
@@ -45,29 +114,18 @@ namespace Personal.Utilities
             return default;
 
         }
-      /*  //get mouse position in world
-        public static Vector3 GetMouseInWorldPositionXZ() 
+/*
+        private IEnumerator countdownTemplate()
         {
-            Vector3 worldPosition = GetInWorldPosition3D(Input.mousePosition, Camera.main);
-            worldPosition.y = 0f;
-            Debug.Log(worldPosition);
-            //worldPosition
-            return worldPosition;
-        }
+            while (countdown > 0)
+            {
+                event?.Invoke();
 
-        public static Vector3 GetMouseInWorldPosition3D() //mouse posiiton in world by default main camera
-        {
-            return GetInWorldPosition3D(Input.mousePosition, Camera.main);
+                yield return new WaitForSeconds(period);
+                coundown--;
+            }
         }
-        public static Vector3 GetMouseInWorldPosition3D(Camera camera) //mouse position, choose camera
-        {
-            return GetInWorldPosition3D(Input.mousePosition, camera);
-        }
-        public static Vector3 GetInWorldPosition3D(Vector3 screenPosition, Camera camera)  //screen to world position
-        {
-           Ray ray = camera.ScreenPointToRay(Input)
-            return worldPosition;
-        }*/
+*/
     }
 }
 

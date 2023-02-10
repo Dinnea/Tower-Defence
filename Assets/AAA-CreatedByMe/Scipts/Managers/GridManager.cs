@@ -142,6 +142,7 @@ public class GridManager : MonoBehaviour
     {       
         List<Vector2Int> gridPositionList = _objectToBuild.GetGridPositionList(new Vector2Int(gridCoords.x, gridCoords.y)); //list of tiles taken up by object
         Transform built = Instantiate(_objectToBuild.prefab.transform, grid.GetCellPositionInWorld(gridCoords.x, gridCoords.y), Quaternion.identity);
+        built.GetComponent<AbstractTower>().SetActive(true);
         //Instantiate(_objectToBuild.visual, grid.GetCellPositionInWorld(gridCoords.x, gridCoords.y), Quaternion.identity, built);
 
         foreach (Vector2Int gridPosition in gridPositionList)
