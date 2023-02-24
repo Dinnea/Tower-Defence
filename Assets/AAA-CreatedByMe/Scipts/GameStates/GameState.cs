@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class GameState : MonoBehaviour
 {
-    [SerializeReference] protected LevelFSM manager;
+    [SerializeReference] public LevelFSM manager;
     private void Awake()
     {
         OnAwake();

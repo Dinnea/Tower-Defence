@@ -10,6 +10,9 @@ TagManager:
   - Waypoint
   - WaypointStorage
   - TowerMesh
+  - TowerSlot
+  - VFX
+  - cost
   layers:
   - Default
   - TransparentFX

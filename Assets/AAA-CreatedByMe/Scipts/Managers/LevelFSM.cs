@@ -33,6 +33,10 @@ public class LevelFSM : MonoBehaviour
 
     private void Awake()
     {
+        foreach (Wave wave in waves)
+        {
+            wave.SetUp();
+        }
         _stateDictionary = new Dictionary<GameStateEnum, GameState>
         {
             { GameStateEnum.BUILDING, GetComponentInChildren<BuildingState>(true) },
@@ -47,10 +51,7 @@ public class LevelFSM : MonoBehaviour
 
     private void Start()
     {
-        foreach (Wave wave in waves)
-        {
-            wave.SetUp();
-        }
+        
     }
     private void subscribeToState()
     {
