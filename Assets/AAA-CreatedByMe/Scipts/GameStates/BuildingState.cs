@@ -6,15 +6,16 @@ using UnityEngine.Events;
 
 public class BuildingState : GameState
 {
-    [SerializeField] private int _waveCountdown = 0;
+    [SerializeField] private int _waveCountdown;
+    [SerializeField] private int _waveNr;
     [SerializeField] private TextMeshProUGUI _countdownDisplay;
-    public System.Action onStateEnd;
+    public System.Action<int> onStateEnd;
     public System.Action<int> onClockTick;
 
     private void OnEnable()
     {
-        _waveCountdown = manager.GetTimeBetweenWaves();
-        StartCoroutine(countdownToWave());
+        //_waveCountdown = manager.GetTimeBetweenWaves();
+        //StartCoroutine(countdownToWave());
     }
     private void OnDisable()
     {
@@ -24,10 +25,10 @@ public class BuildingState : GameState
     {
         if(_waveCountdown <= 0)
         {
-            onStateEnd?.Invoke();
+            onStateEnd?.Invoke(_waveNr);
         }
     }
-    private IEnumerator countdownToWave()
+    public IEnumerator CountdownToWave()
     {
         while (_waveCountdown > 0)
         {
@@ -38,9 +39,24 @@ public class BuildingState : GameState
         }
     }
 
+    public void SetWaveCountdown(int waveCountdown) 
+    {
+        _waveCountdown = waveCountdown;
+    }
+
     public void EndStateEarly()
     {
         StopAllCoroutines();
         _waveCountdown = 0;
+    }
+
+    public void SetWaveNr(int nr)
+    {
+        _waveNr = nr;
+    }
+
+    public int GetWaveNr(int nr)
+    {
+        return _waveNr;
     }
 }

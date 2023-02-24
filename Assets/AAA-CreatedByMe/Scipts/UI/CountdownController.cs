@@ -36,7 +36,7 @@ public class CountdownController : MonoBehaviour
         _countdownText.text = seconds.ToString();
     }
 
-    private void emptySelf()
+    private void emptySelf(int notUsed)
     {
         _countdownText.text = "";
     }

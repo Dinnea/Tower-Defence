@@ -16,4 +16,9 @@ public class HQ : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth, true);
         currentHealth = maxHealth;
     }
+
+    private void Update()
+    {
+        healthBar.TakeDamage(1);
+    }
 }

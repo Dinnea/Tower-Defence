@@ -4,14 +4,15 @@ using UnityEngine;
 
 public abstract class GameState : MonoBehaviour
 {
-    [SerializeReference] public LevelFSM manager;
+    //[SerializeReference] public LevelFSM manager;
+    //protected LevelFSM.GameStateEnum gameState;
     private void Awake()
     {
-        OnAwake();
+       OnAwake();
     }
 
-    protected virtual void OnAwake()
-    {
-        manager = GetComponentInParent<LevelFSM>();
-    }
+    protected virtual void OnAwake() { }
+    //{
+    //    manager = GetComponentInParent<LevelFSM>();
+    //}
 }

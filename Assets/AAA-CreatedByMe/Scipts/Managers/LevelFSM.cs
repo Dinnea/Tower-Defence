@@ -7,6 +7,17 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.UIElements;
 
+
+public class StateChanged
+{
+    public LevelFSM.GameStateEnum state;
+    public StateChanged(LevelFSM.GameStateEnum pState)
+    {
+        this.state = pState;
+    }
+
+}
+
 public class LevelFSM : MonoBehaviour
 {
     public enum GameStateEnum { SPAWNING, WAITING, BUILDING, GAMEOVER}
@@ -16,6 +27,11 @@ public class LevelFSM : MonoBehaviour
     public Wave GetCurrentWave()
     {
         return waves[_currentWave];
+    }
+
+    public int GetWaveNumber()
+    {
+        return _currentWave;
     }
 
     [SerializeField] private int _currentWave = -1;
@@ -106,10 +122,12 @@ public class LevelFSM : MonoBehaviour
     {
         _currentWave++;
         switchGameState(GameStateEnum.BUILDING);
+        handleBuildingState(_stateDictionary[_state] as BuildingState);
     }
-    public void SwitchToSpawningState()
+    public void SwitchToSpawningState(int waveNr)
     {
         switchGameState(GameStateEnum.SPAWNING);
+        handleSpawningState(_stateDictionary[_state] as SpawningState);
     }
     public void SwitchToWaitingState()
     {        
@@ -124,5 +142,17 @@ public class LevelFSM : MonoBehaviour
 
         _stateDictionary[_state].gameObject.SetActive(true);
         subscribeToState();
+    }
+
+    private void handleBuildingState(BuildingState state)
+    {
+        state.SetWaveCountdown(timeBetweenWaves);
+        StartCoroutine(state.CountdownToWave());
+        state.SetWaveNr(_currentWave);
+    }
+
+    private void handleSpawningState(SpawningState state)
+    {
+        StartCoroutine(state.SpawnWave(GetCurrentWave()));
     }
 }

@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class SpawningState : GameState
 {
-    [SerializeField] private Wave _wave;
+    //[SerializeField] private Wave _wave;
     Dictionary<string, IEnemyFactory> _factories;
     public System.Action onSpawningFinished;
 
     private void OnEnable()
     {
-        _wave = manager.GetCurrentWave();
-        StartCoroutine(spawnWave(_wave));
+        //StartCoroutine(SpawnWave(_wave));
     }
 
     private void OnDisable()
     {
         StopAllCoroutines();
     }
-    private IEnumerator spawnWave(Wave wave)
+    public IEnumerator SpawnWave(Wave wave)
     {
         Debug.Log("Spawning wave " + wave.name);
 
@@ -32,9 +31,13 @@ public class SpawningState : GameState
         yield break;
     }
 
+    //public void SetWave(Wave wave)
+    //{
+    //    _wave = wave;
+    //}
     protected override void OnAwake()
     {
-        base.OnAwake();
+      
         _factories = new Dictionary<string, IEnemyFactory>()
         {
             {"basic", GetComponent<BasicEnemyFactory>() }
