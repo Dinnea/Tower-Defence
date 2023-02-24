@@ -19539,7 +19539,6 @@ GameObject:
   - component: {fileID: 82094088292764670}
   - component: {fileID: 136866353072794800}
   - component: {fileID: 6208188645178243338}
-  - component: {fileID: 6087422317148444239}
   - component: {fileID: 4744096290456333997}
   m_Layer: 11
   m_Name: Hoverbuggy
@@ -19716,20 +19715,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6087422317148444239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511114609136056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d4add979a2963449242a8cecd4c6bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _navDestination: {fileID: 0}
-  navPoints: []
 --- !u!114 &4744096290456333997
 MonoBehaviour:
   m_ObjectHideFlags: 0

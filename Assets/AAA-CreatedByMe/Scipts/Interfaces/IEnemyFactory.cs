@@ -5,6 +5,7 @@ using UnityEngine;
 public interface IEnemyFactory
 {
     public void SpawnEnemy();
-    public void GetNavPoints();
+    public void SetWayPoints();
+    public List<Vector3> GetWayPoints();
     string path { get; }
 }

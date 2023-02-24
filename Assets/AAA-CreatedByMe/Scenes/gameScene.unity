@@ -1140,7 +1140,6 @@ GameObject:
   - component: {fileID: 181419607}
   - component: {fileID: 181419606}
   - component: {fileID: 181419610}
-  - component: {fileID: 181419611}
   m_Layer: 0
   m_Name: GameStateController
   m_TagString: Untagged
@@ -1282,20 +1281,6 @@ MonoBehaviour:
   _currentWave: -1
   timeBetweenWaves: 660
   gameObjects: []
---- !u!114 &181419611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 181419605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f1cdc6197da36d4598d491d5ec49fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _waypoints: {fileID: 2096864416}
-  _navPoints: []
 --- !u!4 &182925756 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3315178520456732551, guid: 263e1010ccdb64b48a7d9fe9a570589f,
@@ -1692,63 +1677,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1601931382}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &247099180
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1444973102034290, guid: 1e8fc0d9d18c8408baa941efc8b49d4b, type: 3}
-      propertyPath: m_Name
-      value: LaserTower
-      objectReference: {fileID: 0}
-    - target: {fileID: 4012024577835784, guid: 1e8fc0d9d18c8408baa941efc8b49d4b, type: 3}
-      propertyPath: m_RootOrder
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 4012024577835784, guid: 1e8fc0d9d18c8408baa941efc8b49d4b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4012024577835784, guid: 1e8fc0d9d18c8408baa941efc8b49d4b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4012024577835784, guid: 1e8fc0d9d18c8408baa941efc8b49d4b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4012024577835784, guid: 1e8fc0d9d18c8408baa941efc8b49d4b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4012024577835784, guid: 1e8fc0d9d18c8408baa941efc8b49d4b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4012024577835784, guid: 1e8fc0d9d18c8408baa941efc8b49d4b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4012024577835784, guid: 1e8fc0d9d18c8408baa941efc8b49d4b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4012024577835784, guid: 1e8fc0d9d18c8408baa941efc8b49d4b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4012024577835784, guid: 1e8fc0d9d18c8408baa941efc8b49d4b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4012024577835784, guid: 1e8fc0d9d18c8408baa941efc8b49d4b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1e8fc0d9d18c8408baa941efc8b49d4b, type: 3}
 --- !u!4 &253504810 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3315178520456732551, guid: 263e1010ccdb64b48a7d9fe9a570589f,
@@ -7383,8 +7311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f1cdc6197da36d4598d491d5ec49fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waypoints: {fileID: 2096864416}
-  _navPoints: []
+  _waypoints: []
 --- !u!1001 &931020432
 PrefabInstance:
   m_ObjectHideFlags: 0

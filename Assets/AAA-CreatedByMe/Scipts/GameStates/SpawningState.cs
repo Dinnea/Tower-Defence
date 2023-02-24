@@ -40,7 +40,7 @@ public class SpawningState : GameState
       
         _factories = new Dictionary<string, IEnemyFactory>()
         {
-            {"basic", GetComponent<BasicEnemyFactory>() }
+            {"basic", GetComponent<HoverbuggyFactory>() }
         };
     }
 }

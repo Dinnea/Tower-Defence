@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hoverbuggy : MonoBehaviour, IEnemy
+public class Hoverbuggy : Enemy
 {
-    EnemyNavigator _navMesh;
+    Navigator _navMesh;
     List<Vector3> _navPoints;
     private void Awake()
     {
-        _navMesh = GetComponent<EnemyNavigator>();
+        _navMesh = GetComponent<Navigator>();
     }
 
     private void Start()

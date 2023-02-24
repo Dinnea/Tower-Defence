@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class EnemyNavigator : MonoBehaviour
+public class Navigator : MonoBehaviour, IMoveable
 {
     private NavMeshAgent _navMeshAgent;
     [SerializeField] private Transform _navDestination;
@@ -20,18 +20,25 @@ public class EnemyNavigator : MonoBehaviour
     {
         if (_pointsReached < 7)
         {
-            MoveToGoal();
+            Move();
         }
     }
 
-    void MoveToGoal()
+ 
+
+    public void Move()
     {
         _navMeshAgent.destination = navPoints[_pointsReached];
 
-        if (this.transform.position.x == navPoints[_pointsReached].x && 
-            this.transform.position.z == navPoints[_pointsReached].z)
+        if (transform.position.x == navPoints[_pointsReached].x &&
+            transform.position.z == navPoints[_pointsReached].z)
         {
             _pointsReached++;
         }
+    }
+
+    public void SetNavigation()
+    {
+        throw new NotImplementedException();
     }
 }
